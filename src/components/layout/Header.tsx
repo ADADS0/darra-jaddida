@@ -5,11 +5,22 @@ import { motion } from "framer-motion";
 import {
   Menu,
   X,
-  User
+  User,
+  LogOut,
+  Settings
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import ThemeToggle from "@/components/ThemeToggle";
+import { useAuth } from "@/contexts/AuthContext";
 import casablueLogo from "@/assets/casablue-logo.jpeg";
 
 const Header = () => {
@@ -17,6 +28,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const isRTL = i18n.language === 'ar';
+  const { user, profile, signOut } = useAuth();
 
   const navItems = [
     { label: t('common.home'), href: "/" },
@@ -29,6 +41,21 @@ const Header = () => {
   const isActive = (href: string) => {
     if (href === "/") return location.pathname === "/";
     return location.pathname.startsWith(href);
+  };
+
+  const getInitials = (name: string | null | undefined) => {
+    if (!name) return "U";
+    return name
+      .split(' ')
+      .map(n => n[0])
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
+  };
+
+  const handleSignOut = async () => {
+    await signOut();
+    window.location.href = "/";
   };
 
   return (
@@ -106,24 +133,64 @@ const Header = () => {
 
             <div className="w-px h-6 bg-border mx-1" />
 
-            <Link to="/auth">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg gap-2"
-              >
-                <User className="w-4 h-4" strokeWidth={1.5} />
-                {t('common.login')}
-              </Button>
-            </Link>
-            <Link to="/auth">
-              <Button
-                size="sm"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg shadow-lg shadow-primary/20"
-              >
-                {t('common.register')}
-              </Button>
-            </Link>
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="relative h-9 w-9 rounded-full">
+                    <Avatar className="h-9 w-9 border border-border">
+                      <AvatarImage src={profile?.avatar_url || undefined} />
+                      <AvatarFallback className="bg-primary/10 text-primary text-sm">
+                        {getInitials(profile?.full_name)}
+                      </AvatarFallback>
+                    </Avatar>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56" align="end" forceMount>
+                  <div className="flex items-center justify-start gap-2 p-2">
+                    <div className="flex flex-col space-y-1 leading-none">
+                      <p className="font-medium text-sm">{profile?.full_name || "مستخدم"}</p>
+                      <p className="text-xs text-muted-foreground">{user.email}</p>
+                    </div>
+                  </div>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link to="/profile" className="flex items-center gap-2 cursor-pointer">
+                      <Settings className="w-4 h-4" />
+                      <span>الملف الشخصي</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem
+                    onClick={handleSignOut}
+                    className="text-destructive focus:text-destructive cursor-pointer"
+                  >
+                    <LogOut className="w-4 h-4 ml-2" />
+                    <span>تسجيل الخروج</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <>
+                <Link to="/auth">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg gap-2"
+                  >
+                    <User className="w-4 h-4" strokeWidth={1.5} />
+                    {t('common.login')}
+                  </Button>
+                </Link>
+                <Link to="/auth">
+                  <Button
+                    size="sm"
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg shadow-lg shadow-primary/20"
+                  >
+                    {t('common.register')}
+                  </Button>
+                </Link>
+              </>
+            )}
           </motion.div>
 
           {/* Mobile Menu Button */}
@@ -168,18 +235,53 @@ const Header = () => {
                   </Link>
                 );
               })}
-              <div className="flex gap-2 pt-4 mt-2 border-t border-border/50">
-                <Link to="/auth" className="flex-1" onClick={() => setIsMenuOpen(false)}>
-                  <Button variant="outline" size="sm" className="w-full">
-                    {t('common.login')}
-                  </Button>
-                </Link>
-                <Link to="/auth" className="flex-1" onClick={() => setIsMenuOpen(false)}>
-                  <Button size="sm" className="w-full bg-primary hover:bg-primary/90">
-                    {t('common.register')}
-                  </Button>
-                </Link>
-              </div>
+
+              {user ? (
+                <>
+                  <div className="pt-4 mt-2 border-t border-border/50">
+                    <div className="flex items-center gap-3 px-4 py-2 mb-2">
+                      <Avatar className="h-10 w-10 border border-border">
+                        <AvatarImage src={profile?.avatar_url || undefined} />
+                        <AvatarFallback className="bg-primary/10 text-primary">
+                          {getInitials(profile?.full_name)}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <p className="font-medium text-sm">{profile?.full_name || "مستخدم"}</p>
+                        <p className="text-xs text-muted-foreground">{user.email}</p>
+                      </div>
+                    </div>
+                    <Link to="/profile" onClick={() => setIsMenuOpen(false)}>
+                      <Button variant="outline" size="sm" className="w-full mb-2 gap-2">
+                        <Settings className="w-4 h-4" />
+                        الملف الشخصي
+                      </Button>
+                    </Link>
+                    <Button
+                      variant="destructive"
+                      size="sm"
+                      className="w-full gap-2"
+                      onClick={handleSignOut}
+                    >
+                      <LogOut className="w-4 h-4" />
+                      تسجيل الخروج
+                    </Button>
+                  </div>
+                </>
+              ) : (
+                <div className="flex gap-2 pt-4 mt-2 border-t border-border/50">
+                  <Link to="/auth" className="flex-1" onClick={() => setIsMenuOpen(false)}>
+                    <Button variant="outline" size="sm" className="w-full">
+                      {t('common.login')}
+                    </Button>
+                  </Link>
+                  <Link to="/auth" className="flex-1" onClick={() => setIsMenuOpen(false)}>
+                    <Button size="sm" className="w-full bg-primary hover:bg-primary/90">
+                      {t('common.register')}
+                    </Button>
+                  </Link>
+                </div>
+              )}
             </nav>
           </motion.div>
         )}
