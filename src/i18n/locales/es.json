@@ -1,0 +1,237 @@
+{
+  "common": {
+    "home": "Inicio",
+    "markets": "Mercados",
+    "screener": "Screener",
+    "funds": "Fondos",
+    "login": "Iniciar sesión",
+    "register": "Registrarse",
+    "search": "Buscar",
+    "refresh": "Actualizar",
+    "export": "Exportar",
+    "viewAll": "Ver todo",
+    "loading": "Cargando...",
+    "error": "Error",
+    "retry": "Reintentar",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "close": "Cerrar",
+    "yes": "Sí",
+    "no": "No"
+  },
+  "hero": {
+    "badge": "La primera plataforma de la bolsa marroquí",
+    "title1": "Sigue el mercado",
+    "title2": "bursátil marroquí",
+    "title3": "con inteligencia",
+    "subtitle": "Una plataforma completa para seguir la Bolsa de Casablanca con mapas de calor interactivos, análisis avanzados y herramientas profesionales para gestionar tu cartera",
+    "cta": "Descubrir el mercado",
+    "ctaSecondary": "Screener inteligente"
+  },
+  "stats": {
+    "stocks": "acciones cotizadas",
+    "sectors": "sectores",
+    "monitoring": "monitoreo continuo",
+    "analysis": "análisis diarios"
+  },
+  "features": {
+    "title": "Herramientas profesionales para cada inversor",
+    "subtitle": "Te proporcionamos todo lo que necesitas para analizar el mercado y tomar decisiones de inversión informadas",
+    "heatmap": {
+      "title": "Mapa de calor de acciones",
+      "description": "Sigue los movimientos del mercado en tiempo real con una visualización del rendimiento de cada sector"
+    },
+    "analytics": {
+      "title": "Análisis avanzados",
+      "description": "Herramientas de análisis técnico y fundamental para mejores decisiones de inversión"
+    },
+    "alerts": {
+      "title": "Alertas inteligentes",
+      "description": "Notificaciones instantáneas cuando cambien los precios de las acciones"
+    },
+    "portfolio": {
+      "title": "Gestión de cartera",
+      "description": "Sigue tus inversiones y calcula automáticamente los rendimientos"
+    },
+    "liveData": {
+      "title": "Datos en tiempo real",
+      "description": "Precios actualizados de la Bolsa de Casablanca momento a momento"
+    },
+    "risk": {
+      "title": "Análisis de riesgos",
+      "description": "Indicadores de riesgo y volatilidad para evaluar tus inversiones"
+    }
+  },
+  "markets": {
+    "title": "Mercado bursátil marroquí",
+    "lastUpdate": "Última actualización",
+    "totalStocks": "Total de acciones",
+    "gainers": "Alcistas",
+    "losers": "Bajistas",
+    "unchanged": "Sin cambios",
+    "allSectors": "Todos los sectores",
+    "searchPlaceholder": "Buscar una acción...",
+    "table": {
+      "rank": "#",
+      "symbol": "Símbolo",
+      "name": "Nombre",
+      "sector": "Sector",
+      "price": "Precio (MAD)",
+      "change": "Variación %",
+      "marketCap": "Capitalización",
+      "favorite": "Favorito"
+    },
+    "pagination": {
+      "showing": "Mostrando",
+      "of": "de"
+    }
+  },
+  "screener": {
+    "title": "Screener de acciones",
+    "subtitle": "Descubre oportunidades de inversión según criterios de análisis fundamental",
+    "saveSearch": "Guardar búsqueda",
+    "strategies": "Estrategias predefinidas",
+    "searchPlaceholder": "Buscar por símbolo o nombre de empresa...",
+    "filters": {
+      "title": "Filtros de búsqueda",
+      "subtitle": "Define los criterios de filtrado",
+      "reset": "Restablecer",
+      "per": "Ratio Precio/Beneficios (PER)",
+      "perHelp": "PER bajo = acción más barata relativamente",
+      "pb": "Precio/Valor contable (P/B)",
+      "pbHelp": "P/B < 1 = por debajo del valor contable",
+      "dividendYield": "Rendimiento por dividendo (%)",
+      "dividendHelp": "Rendimiento alto = mayor ingreso anual",
+      "roe": "Rentabilidad sobre fondos propios (ROE)",
+      "roeHelp": "ROE alto = eficiencia en el uso del capital",
+      "liquidity": "Puntuación de liquidez",
+      "liquidityHelp": "Alta liquidez = facilidad de compra/venta",
+      "sector": "Sector",
+      "sectorHelp": "Elige un sector específico"
+    },
+    "results": {
+      "title": "Resultados de búsqueda",
+      "matchingStocks": "acciones coincidentes",
+      "lastUpdate": "Actualización",
+      "noResults": "No hay acciones que coincidan con los criterios",
+      "tryDifferent": "Intenta relajar algunos filtros"
+    },
+    "disclaimer": "Esta información se proporciona únicamente con fines educativos y analíticos y no constituye asesoramiento de inversión. El rendimiento pasado no garantiza resultados futuros. Se recomienda consultar a un asesor financiero calificado antes de cualquier decisión de inversión."
+  },
+  "funds": {
+    "title": "Fondos de inversión marroquíes",
+    "subtitle": "Explora y compara fondos OPCVM disponibles en el mercado marroquí",
+    "breadcrumb": "Fondos OPCVM",
+    "compare": "Comparar",
+    "searchPlaceholder": "Buscar un fondo o gestora...",
+    "allCategories": "Todas las categorías",
+    "allManagers": "Todas las gestoras",
+    "table": {
+      "fund": "Fondo",
+      "category": "Categoría",
+      "nav": "VL",
+      "change": "Variación",
+      "return1Y": "Rendimiento (1 año)",
+      "return3Y": "Rendimiento (3 años)",
+      "volatility": "Volatilidad",
+      "sharpe": "Sharpe",
+      "fees": "Comisiones",
+      "aum": "Activos"
+    },
+    "categories": {
+      "stocks": "Acciones",
+      "bonds": "Bonos",
+      "balanced": "Equilibrado",
+      "monetary": "Monetario",
+      "contractual": "Contractual"
+    },
+    "avgAnnualReturn": "Rendimiento anual promedio",
+    "showing": "Mostrando",
+    "of": "de",
+    "fund": "fondo",
+    "selectedForComparison": "fondos seleccionados para comparar",
+    "maxFunds": "Máximo 4"
+  },
+  "heatmap": {
+    "title": "Mapa de acciones",
+    "stocks": "acciones",
+    "gainers": "alcistas",
+    "losers": "bajistas",
+    "sizeBy": "Tamaño por",
+    "colorBy": "Color por",
+    "groupBy": "Agrupar por",
+    "marketCap": "Capitalización",
+    "volume": "Volumen",
+    "change1h": "Variación 1h",
+    "change4h": "Variación 4h",
+    "change1d": "Variación 1d",
+    "sector": "Sector",
+    "flatGrid": "Cuadrícula plana",
+    "viewAll": "Ver todo"
+  },
+  "news": {
+    "title": "Noticias del mercado",
+    "categories": {
+      "all": "Todo",
+      "market": "Mercado",
+      "company": "Empresas",
+      "sector": "Sectores",
+      "economy": "Economía",
+      "analysis": "Análisis"
+    },
+    "importance": {
+      "high": "Importante",
+      "medium": "Medio",
+      "low": "Normal"
+    },
+    "readMore": "Leer más",
+    "minutesAgo": "minutos"
+  },
+  "quickAccess": {
+    "title": "Acceso rápido",
+    "markets": {
+      "title": "Mercado de acciones",
+      "description": "Tabla completa de todas las acciones con logos y detalles"
+    },
+    "screener": {
+      "title": "Screener inteligente",
+      "description": "Filtrar acciones según criterios personalizados"
+    },
+    "funds": {
+      "title": "Fondos de inversión",
+      "description": "Descubre el rendimiento de los fondos de inversión"
+    }
+  },
+  "sectors": {
+    "all": "Todos los sectores",
+    "banks": "Bancos",
+    "telecom": "Telecomunicaciones",
+    "realEstate": "Inmobiliario",
+    "mining": "Minería",
+    "energy": "Energía",
+    "insurance": "Seguros",
+    "construction": "Construcción",
+    "distribution": "Distribución",
+    "industry": "Industria"
+  },
+  "liquidity": {
+    "all": "Todo",
+    "high": "Alta",
+    "medium": "Media",
+    "low": "Baja"
+  },
+  "footer": {
+    "about": "Acerca de",
+    "contact": "Contacto",
+    "privacy": "Privacidad",
+    "terms": "Términos",
+    "rights": "Todos los derechos reservados",
+    "disclaimer": "El contenido proporcionado en esta plataforma es solo para fines informativos y educativos y no constituye asesoramiento de inversión personal o consejo financiero. No garantizamos la integridad o exactitud de los datos en tiempo real. El rendimiento pasado no garantiza resultados futuros. Consulte a un asesor financiero antes de cualquier decisión de inversión.",
+    "dataSources": "Fuentes de datos"
+  },
+  "language": {
+    "ar": "العربية",
+    "fr": "Français",
+    "es": "Español"
+  }
+}

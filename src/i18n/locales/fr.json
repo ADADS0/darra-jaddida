@@ -1,0 +1,237 @@
+{
+  "common": {
+    "home": "Accueil",
+    "markets": "Marchés",
+    "screener": "Screener",
+    "funds": "Fonds",
+    "login": "Connexion",
+    "register": "S'inscrire",
+    "search": "Rechercher",
+    "refresh": "Actualiser",
+    "export": "Exporter",
+    "viewAll": "Voir tout",
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "retry": "Réessayer",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "yes": "Oui",
+    "no": "Non"
+  },
+  "hero": {
+    "badge": "La première plateforme de la bourse marocaine",
+    "title1": "Suivez le marché",
+    "title2": "boursier marocain",
+    "title3": "avec intelligence",
+    "subtitle": "Une plateforme complète pour suivre la Bourse de Casablanca avec des cartes thermiques interactives, des analyses avancées et des outils professionnels pour gérer votre portefeuille",
+    "cta": "Découvrir le marché",
+    "ctaSecondary": "Screener intelligent"
+  },
+  "stats": {
+    "stocks": "actions cotées",
+    "sectors": "secteurs",
+    "monitoring": "surveillance continue",
+    "analysis": "analyses quotidiennes"
+  },
+  "features": {
+    "title": "Outils professionnels pour chaque investisseur",
+    "subtitle": "Nous vous fournissons tout ce dont vous avez besoin pour analyser le marché et prendre des décisions d'investissement éclairées",
+    "heatmap": {
+      "title": "Carte thermique des actions",
+      "description": "Suivez les mouvements du marché en temps réel avec une visualisation de la performance de chaque secteur"
+    },
+    "analytics": {
+      "title": "Analyses avancées",
+      "description": "Outils d'analyse technique et fondamentale pour de meilleures décisions d'investissement"
+    },
+    "alerts": {
+      "title": "Alertes intelligentes",
+      "description": "Notifications instantanées lorsque les prix des actions changent"
+    },
+    "portfolio": {
+      "title": "Gestion de portefeuille",
+      "description": "Suivez vos investissements et calculez automatiquement les rendements"
+    },
+    "liveData": {
+      "title": "Données en direct",
+      "description": "Prix actualisés de la Bourse de Casablanca en temps réel"
+    },
+    "risk": {
+      "title": "Analyse des risques",
+      "description": "Indicateurs de risque et de volatilité pour évaluer vos investissements"
+    }
+  },
+  "markets": {
+    "title": "Marché boursier marocain",
+    "lastUpdate": "Dernière mise à jour",
+    "totalStocks": "Total des actions",
+    "gainers": "En hausse",
+    "losers": "En baisse",
+    "unchanged": "Inchangées",
+    "allSectors": "Tous les secteurs",
+    "searchPlaceholder": "Rechercher une action...",
+    "table": {
+      "rank": "#",
+      "symbol": "Symbole",
+      "name": "Nom",
+      "sector": "Secteur",
+      "price": "Prix (MAD)",
+      "change": "Variation %",
+      "marketCap": "Capitalisation",
+      "favorite": "Favori"
+    },
+    "pagination": {
+      "showing": "Affichage",
+      "of": "sur"
+    }
+  },
+  "screener": {
+    "title": "Screener d'actions",
+    "subtitle": "Découvrez les opportunités d'investissement selon les critères d'analyse fondamentale",
+    "saveSearch": "Sauvegarder la recherche",
+    "strategies": "Stratégies prédéfinies",
+    "searchPlaceholder": "Rechercher par symbole ou nom de société...",
+    "filters": {
+      "title": "Filtres de recherche",
+      "subtitle": "Définir les critères de tri",
+      "reset": "Réinitialiser",
+      "per": "Ratio Prix/Bénéfices (PER)",
+      "perHelp": "PER bas = action moins chère relativement",
+      "pb": "Prix/Valeur comptable (P/B)",
+      "pbHelp": "P/B < 1 = en dessous de la valeur comptable",
+      "dividendYield": "Rendement du dividende (%)",
+      "dividendHelp": "Rendement élevé = revenu annuel plus important",
+      "roe": "Rendement des capitaux propres (ROE)",
+      "roeHelp": "ROE élevé = efficacité d'utilisation du capital",
+      "liquidity": "Score de liquidité",
+      "liquidityHelp": "Liquidité élevée = facilité d'achat/vente",
+      "sector": "Secteur",
+      "sectorHelp": "Choisissez un secteur spécifique"
+    },
+    "results": {
+      "title": "Résultats de recherche",
+      "matchingStocks": "actions correspondantes",
+      "lastUpdate": "Mise à jour",
+      "noResults": "Aucune action ne correspond aux critères",
+      "tryDifferent": "Essayez d'assouplir certains filtres"
+    },
+    "disclaimer": "Ces informations sont fournies à des fins éducatives et analytiques uniquement et ne constituent pas un conseil en investissement. Les performances passées ne garantissent pas les résultats futurs. Il est conseillé de consulter un conseiller financier qualifié avant toute décision d'investissement."
+  },
+  "funds": {
+    "title": "Fonds d'investissement marocains",
+    "subtitle": "Explorez et comparez les fonds OPCVM disponibles sur le marché marocain",
+    "breadcrumb": "Fonds OPCVM",
+    "compare": "Comparer",
+    "searchPlaceholder": "Rechercher un fonds ou une société de gestion...",
+    "allCategories": "Toutes les catégories",
+    "allManagers": "Toutes les sociétés",
+    "table": {
+      "fund": "Fonds",
+      "category": "Catégorie",
+      "nav": "VL",
+      "change": "Variation",
+      "return1Y": "Rendement (1 an)",
+      "return3Y": "Rendement (3 ans)",
+      "volatility": "Volatilité",
+      "sharpe": "Sharpe",
+      "fees": "Frais",
+      "aum": "Actifs"
+    },
+    "categories": {
+      "stocks": "Actions",
+      "bonds": "Obligations",
+      "balanced": "Équilibré",
+      "monetary": "Monétaire",
+      "contractual": "Contractuel"
+    },
+    "avgAnnualReturn": "Rendement annuel moyen",
+    "showing": "Affichage",
+    "of": "sur",
+    "fund": "fonds",
+    "selectedForComparison": "fonds sélectionnés pour comparaison",
+    "maxFunds": "Maximum 4"
+  },
+  "heatmap": {
+    "title": "Carte des actions",
+    "stocks": "actions",
+    "gainers": "en hausse",
+    "losers": "en baisse",
+    "sizeBy": "Taille par",
+    "colorBy": "Couleur par",
+    "groupBy": "Grouper par",
+    "marketCap": "Capitalisation",
+    "volume": "Volume",
+    "change1h": "Variation 1h",
+    "change4h": "Variation 4h",
+    "change1d": "Variation 1j",
+    "sector": "Secteur",
+    "flatGrid": "Grille plate",
+    "viewAll": "Voir tout"
+  },
+  "news": {
+    "title": "Actualités du marché",
+    "categories": {
+      "all": "Tout",
+      "market": "Marché",
+      "company": "Entreprises",
+      "sector": "Secteurs",
+      "economy": "Économie",
+      "analysis": "Analyse"
+    },
+    "importance": {
+      "high": "Important",
+      "medium": "Moyen",
+      "low": "Normal"
+    },
+    "readMore": "Lire la suite",
+    "minutesAgo": "minutes"
+  },
+  "quickAccess": {
+    "title": "Accès rapide",
+    "markets": {
+      "title": "Marché des actions",
+      "description": "Tableau complet de toutes les actions avec logos et détails"
+    },
+    "screener": {
+      "title": "Screener intelligent",
+      "description": "Filtrer les actions selon des critères personnalisés"
+    },
+    "funds": {
+      "title": "Fonds d'investissement",
+      "description": "Découvrez la performance des fonds d'investissement"
+    }
+  },
+  "sectors": {
+    "all": "Tous les secteurs",
+    "banks": "Banques",
+    "telecom": "Télécommunications",
+    "realEstate": "Immobilier",
+    "mining": "Mines",
+    "energy": "Énergie",
+    "insurance": "Assurance",
+    "construction": "Construction",
+    "distribution": "Distribution",
+    "industry": "Industrie"
+  },
+  "liquidity": {
+    "all": "Tout",
+    "high": "Élevée",
+    "medium": "Moyenne",
+    "low": "Faible"
+  },
+  "footer": {
+    "about": "À propos",
+    "contact": "Contact",
+    "privacy": "Confidentialité",
+    "terms": "Conditions",
+    "rights": "Tous droits réservés",
+    "disclaimer": "Le contenu fourni sur cette plateforme est à des fins informatives et éducatives uniquement et ne constitue pas un conseil en investissement personnel ou un avis financier. Nous ne garantissons pas l'exhaustivité ou l'exactitude des données en temps réel. Les performances passées ne garantissent pas les résultats futurs. Consultez un conseiller financier avant toute décision d'investissement.",
+    "dataSources": "Sources de données"
+  },
+  "language": {
+    "ar": "العربية",
+    "fr": "Français",
+    "es": "Español"
+  }
+}
