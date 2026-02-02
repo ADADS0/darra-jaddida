@@ -1,10 +1,38 @@
 import { TrendingUp } from "lucide-react";
+import { Link } from "react-router-dom";
 
-const footerLinks = {
-  المنتج: ["ماسح الأسهم", "تحليل الأسهم", "صناديق OPCVM", "التنبيهات", "API"],
-  الشركة: ["من نحن", "الوظائف", "المدونة", "تواصل معنا"],
-  القانوني: ["شروط الاستخدام", "سياسة الخصوصية", "المنهجيات", "إخلاء المسؤولية"],
-  الموارد: ["مركز المساعدة", "التعليم", "المصطلحات", "الأسئلة الشائعة"],
+interface FooterLink {
+  label: string;
+  href: string;
+  isRoute?: boolean;
+}
+
+interface FooterLinks {
+  [category: string]: FooterLink[];
+}
+
+const footerLinks: FooterLinks = {
+  المنتج: [
+    { label: "ماسح الأسهم", href: "/screener", isRoute: true },
+    { label: "تحليل الأسهم", href: "/markets", isRoute: true },
+    { label: "صناديق OPCVM", href: "/funds", isRoute: true },
+    { label: "القطاعات", href: "/sectors", isRoute: true },
+  ],
+  الشركة: [
+    { label: "من نحن", href: "#" },
+    { label: "المدونة", href: "/blog", isRoute: true },
+    { label: "تواصل معنا", href: "mailto:contact@casabourse.ma" },
+  ],
+  القانوني: [
+    { label: "شروط الاستخدام", href: "/terms", isRoute: true },
+    { label: "سياسة الخصوصية", href: "/privacy", isRoute: true },
+    { label: "إخلاء المسؤولية", href: "/disclaimer", isRoute: true },
+  ],
+  الموارد: [
+    { label: "مركز المساعدة", href: "#" },
+    { label: "التعليم", href: "#" },
+    { label: "الأسئلة الشائعة", href: "#" },
+  ],
 };
 
 const Footer = () => {
@@ -14,15 +42,15 @@ const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <div className="flex items-center gap-3 mb-4">
+            <Link to="/" className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
                 <TrendingUp className="w-5 h-5 text-primary-foreground" />
               </div>
               <div className="flex flex-col">
-                <span className="text-lg font-bold text-foreground">مالية</span>
+                <span className="text-lg font-bold text-foreground">CasaBourse</span>
                 <span className="text-[10px] text-muted-foreground">Financial Intelligence</span>
               </div>
-            </div>
+            </Link>
             <p className="text-sm text-muted-foreground leading-relaxed">
               المنصّة المغربية للذكاء المالي. بيانات موثّقة، تحليلات شفافة، وشروحات عربية.
             </p>
@@ -34,10 +62,22 @@ const Footer = () => {
               <h4 className="font-semibold text-foreground mb-4">{category}</h4>
               <ul className="space-y-2">
                 {links.map((link) => (
-                  <li key={link}>
-                    <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                      {link}
-                    </a>
+                  <li key={link.label}>
+                    {link.isRoute ? (
+                      <Link
+                        to={link.href}
+                        className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        {link.label}
+                      </Link>
+                    ) : (
+                      <a
+                        href={link.href}
+                        className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        {link.label}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -48,16 +88,17 @@ const Footer = () => {
         {/* Disclaimer */}
         <div className="bg-secondary/50 rounded-xl p-4 mb-8">
           <p className="text-xs text-muted-foreground leading-relaxed">
-            <strong className="text-foreground">تنويه:</strong> المحتوى المقدّم على هذه المنصّة لأغراض معلوماتية وتعليمية فقط، ولا يشكل توصية استثمارية شخصية أو نصيحة مالية. 
-            لا نضمن اكتمال أو دقة البيانات في الوقت الحقيقي، يرجى مراجعة المصادر الرسمية. الأداء التاريخي لا يضمن النتائج المستقبلية. 
-            استشر مختصاً مالياً قبل اتخاذ أي قرار استثماري.
+            <strong className="text-foreground">تنويه:</strong> المحتوى المقدّم على هذه المنصّة لأغراض معلوماتية وتعليمية فقط، ولا يشكل توصية استثمارية شخصية أو نصيحة مالية.
+            لا نضمن اكتمال أو دقة البيانات في الوقت الحقيقي، يرجى مراجعة المصادر الرسمية. الأداء التاريخي لا يضمن النتائج المستقبلية.
+            استشر مختصاً مالياً قبل اتخاذ أي قرار استثماري.{" "}
+            <Link to="/disclaimer" className="text-primary hover:underline">اقرأ المزيد</Link>
           </p>
         </div>
 
         {/* Bottom */}
         <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-border">
           <p className="text-sm text-muted-foreground mb-4 md:mb-0">
-            © 2025 مالية. جميع الحقوق محفوظة.
+            © 2026 CasaBourse.ma. جميع الحقوق محفوظة.
           </p>
           <div className="flex items-center gap-4">
             <span className="text-xs text-muted-foreground">مصادر البيانات:</span>

@@ -1,15 +1,16 @@
-# Casablue Project - Tasks
+# CasaBourse Project - Tasks
 
-## Completed ✅
-- [x] Clone GitHub repository
-- [x] Remove icons from navigation menu items
-- [x] Link login/register buttons to /auth page
-- [x] Create splash loading screen on app startup
-- [x] Add third theme (Pure Black/AMOLED) option
-- [x] Update ThemeToggle with dropdown menu for 3 themes
+## Completed
+- [x] Clone repository from GitHub
 
-## Pending 📋
-- [ ] Connect authentication to real Supabase database (requires Supabase project setup)
-- [ ] Add user session management
-- [ ] Add protected routes for authenticated users
-- [ ] Improve loading screen with actual resource loading detection
+## In Progress
+- [ ] Fix duplicate AuthProvider import bug in App.tsx
+- [ ] Set up Supabase authentication with proper database tables and RLS
+
+## Todo
+- [ ] Create legal pages (Terms of Use, Privacy Policy, Disclaimer)
+- [ ] Add links to legal pages in Footer
+- [ ] Add performance optimization for 500+ nodes using spatial indexing
+- [ ] Implement layout comparison mode with side-by-side views
+- [ ] Add export animation as GIF/video feature
+- [ ] Improve arrow styling
