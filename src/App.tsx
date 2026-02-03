@@ -11,6 +11,8 @@ import Index from "./pages/Index";
 import Markets from "./pages/Markets";
 import StockProfile from "./pages/StockProfile";
 import StockScreener from "./pages/StockScreener";
+import StockCompare from "./pages/StockCompare";
+import Watchlist from "./pages/Watchlist";
 import FundProfile from "./pages/FundProfile";
 import FundsList from "./pages/FundsList";
 import Sectors from "./pages/Sectors";
@@ -52,6 +54,7 @@ const App = () => {
               <Route path="/markets" element={<Markets />} />
               <Route path="/stock/:symbol" element={<StockProfile />} />
               <Route path="/screener" element={<StockScreener />} />
+              <Route path="/compare" element={<StockCompare />} />
               <Route path="/funds" element={<FundsList />} />
               <Route path="/fund/:fundId" element={<FundProfile />} />
               <Route path="/sectors" element={<Sectors />} />
@@ -60,6 +63,14 @@ const App = () => {
               <Route path="/terms" element={<Terms />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/disclaimer" element={<Disclaimer />} />
+              <Route
+                path="/watchlist"
+                element={
+                  <ProtectedRoute>
+                    <Watchlist />
+                  </ProtectedRoute>
+                }
+              />
               <Route
                 path="/profile"
                 element={
