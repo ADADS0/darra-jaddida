@@ -118,14 +118,14 @@ const Sectors = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#0d1117]" dir="rtl">
+      <div className="min-h-screen bg-background" dir="rtl">
         <Header />
         <main className="pt-24 pb-16">
           <div className="container mx-auto px-4">
-            <Skeleton className="h-10 w-64 mb-8 bg-[#21262d]" />
+            <Skeleton className="h-10 w-64 mb-8" />
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {[...Array(8)].map((_, i) => (
-                <Skeleton key={i} className="h-40 rounded-xl bg-[#21262d]" />
+                <Skeleton key={i} className="h-40 rounded-xl" />
               ))}
             </div>
           </div>
@@ -135,7 +135,7 @@ const Sectors = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#0d1117]" dir="rtl">
+    <div className="min-h-screen bg-background" dir="rtl">
       <Header />
       
       <main className="pt-24 pb-16">
@@ -144,23 +144,23 @@ const Sectors = () => {
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex items-center gap-2 text-sm text-[#8b949e] mb-6"
+            className="flex items-center gap-2 text-sm text-muted-foreground mb-6"
           >
-            <Link to="/" className="hover:text-white transition-colors">الرئيسية</Link>
+            <Link to="/" className="hover:text-foreground transition-colors">الرئيسية</Link>
             <span>/</span>
             {selectedSector ? (
               <>
                 <button 
                   onClick={() => setSelectedSector(null)}
-                  className="hover:text-white transition-colors"
+                  className="hover:text-foreground transition-colors"
                 >
                   القطاعات
                 </button>
                 <span>/</span>
-                <span className="text-white">{sectorGroups.find(s => s.name === selectedSector)?.nameAr}</span>
+                <span className="text-foreground">{sectorGroups.find(s => s.name === selectedSector)?.nameAr}</span>
               </>
             ) : (
-              <span className="text-white">القطاعات</span>
+              <span className="text-foreground">القطاعات</span>
             )}
           </motion.div>
 
@@ -175,8 +175,8 @@ const Sectors = () => {
               >
                 <div className="flex items-center justify-between mb-8">
                   <div>
-                    <h1 className="text-3xl font-bold text-white mb-2">قطاعات البورصة</h1>
-                    <p className="text-[#8b949e]">
+                    <h1 className="text-3xl font-bold text-foreground mb-2">قطاعات البورصة</h1>
+                    <p className="text-muted-foreground">
                       استكشف {sectorGroups.length} قطاع و {data?.stocks.length} شركة
                     </p>
                   </div>
@@ -190,31 +190,31 @@ const Sectors = () => {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.05 }}
                       onClick={() => setSelectedSector(sector.name)}
-                      className="group bg-[#161b22] rounded-2xl p-5 border border-[#30363d] hover:border-[#484f58] transition-all text-right"
+                      className="group bg-card rounded-2xl p-5 border border-border hover:border-primary/50 transition-all text-right"
                     >
                       <div className="flex items-start justify-between mb-4">
-                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${SECTOR_COLORS[sector.name] || 'from-[#21262d] to-[#30363d]'} flex items-center justify-center`}>
-                          {SECTOR_ICONS[sector.name] || <Building2 className="w-5 h-5 text-white" />}
+                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${SECTOR_COLORS[sector.name] || 'from-secondary to-muted'} flex items-center justify-center text-white`}>
+                          {SECTOR_ICONS[sector.name] || <Building2 className="w-5 h-5" />}
                         </div>
-                        <div className={`text-sm font-semibold ${sector.avgChange >= 0 ? 'text-[#3fb950]' : 'text-[#f85149]'}`}>
+                        <div className={`text-sm font-semibold ${sector.avgChange >= 0 ? 'text-chart-positive' : 'text-chart-negative'}`}>
                           {sector.avgChange >= 0 ? '+' : ''}{sector.avgChange.toFixed(2)}%
                         </div>
                       </div>
                       
-                      <h3 className="text-lg font-bold text-white mb-1">{sector.nameAr}</h3>
-                      <p className="text-xs text-[#8b949e] mb-3">{sector.name}</p>
+                      <h3 className="text-lg font-bold text-foreground mb-1">{sector.nameAr}</h3>
+                      <p className="text-xs text-muted-foreground mb-3">{sector.name}</p>
                       
                       <div className="flex items-center justify-between text-xs">
-                        <div className="flex items-center gap-1 text-[#8b949e]">
+                        <div className="flex items-center gap-1 text-muted-foreground">
                           <Users className="w-3 h-3" />
                           <span>{sector.stockCount} شركة</span>
                         </div>
-                        <div className="text-[#8b949e]">
+                        <div className="text-muted-foreground">
                           {(sector.totalMarketCap / 1000).toFixed(1)}B MAD
                         </div>
                       </div>
                       
-                      <div className="mt-4 pt-3 border-t border-[#30363d]">
+                      <div className="mt-4 pt-3 border-t border-border">
                         <div className="flex items-center justify-between">
                           <div className="flex -space-x-2 rtl:space-x-reverse">
                             {sector.stocks.slice(0, 4).map((stock) => {
@@ -224,24 +224,24 @@ const Sectors = () => {
                                   key={stock.symbol}
                                   src={logoUrl}
                                   alt={stock.symbol}
-                                  className="w-6 h-6 rounded-full bg-white border-2 border-[#161b22] object-contain p-0.5"
+                                  className="w-6 h-6 rounded-full bg-white border-2 border-card object-contain p-0.5"
                                 />
                               ) : (
                                 <div
                                   key={stock.symbol}
-                                  className="w-6 h-6 rounded-full bg-[#21262d] border-2 border-[#161b22] flex items-center justify-center text-[8px] font-bold text-white"
+                                  className="w-6 h-6 rounded-full bg-secondary border-2 border-card flex items-center justify-center text-[8px] font-bold text-foreground"
                                 >
                                   {stock.symbol.charAt(0)}
                                 </div>
                               );
                             })}
                             {sector.stockCount > 4 && (
-                              <div className="w-6 h-6 rounded-full bg-[#21262d] border-2 border-[#161b22] flex items-center justify-center text-[8px] text-[#8b949e]">
+                              <div className="w-6 h-6 rounded-full bg-secondary border-2 border-card flex items-center justify-center text-[8px] text-muted-foreground">
                                 +{sector.stockCount - 4}
                               </div>
                             )}
                           </div>
-                          <ArrowLeft className="w-4 h-4 text-[#8b949e] group-hover:text-white group-hover:-translate-x-1 transition-all rotate-180" />
+                          <ArrowLeft className="w-4 h-4 text-muted-foreground group-hover:text-foreground group-hover:-translate-x-1 transition-all rotate-180" />
                         </div>
                       </div>
                     </motion.button>
@@ -261,15 +261,15 @@ const Sectors = () => {
                   <div className="flex items-center gap-4">
                     <button
                       onClick={() => setSelectedSector(null)}
-                      className="p-2 rounded-lg bg-[#21262d] text-[#8b949e] hover:text-white hover:bg-[#30363d] transition-all"
+                      className="p-2 rounded-lg bg-secondary text-muted-foreground hover:text-foreground hover:bg-secondary/80 transition-all"
                     >
                       <ArrowLeft className="w-5 h-5" />
                     </button>
                     <div>
-                      <h1 className="text-2xl font-bold text-white">
+                      <h1 className="text-2xl font-bold text-foreground">
                         {sectorGroups.find(s => s.name === selectedSector)?.nameAr}
                       </h1>
-                      <p className="text-sm text-[#8b949e]">
+                      <p className="text-sm text-muted-foreground">
                         {filteredStocks.length} شركة في هذا القطاع
                       </p>
                     </div>
@@ -279,35 +279,35 @@ const Sectors = () => {
                 {/* Filters */}
                 <div className="flex flex-wrap items-center gap-3 mb-6">
                   <div className="relative flex-1 max-w-xs">
-                    <Search className="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 text-[#8b949e]" />
+                    <Search className="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
                     <input
                       type="text"
                       placeholder="بحث..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      className="w-full bg-[#21262d] border border-[#30363d] rounded-xl py-2.5 pr-10 pl-4 text-white placeholder:text-[#8b949e] focus:border-[#2962ff] focus:ring-1 focus:ring-[#2962ff] outline-none"
+                      className="w-full bg-secondary border border-border rounded-xl py-2.5 pr-10 pl-4 text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-1 focus:ring-primary outline-none"
                     />
                   </div>
                   
                   <DropdownMenu>
-                    <DropdownMenuTrigger className="flex items-center gap-2 bg-[#21262d] border border-[#30363d] rounded-xl px-4 py-2.5 text-white hover:bg-[#30363d] transition-all">
-                      <Filter className="w-4 h-4 text-[#8b949e]" />
+                    <DropdownMenuTrigger className="flex items-center gap-2 bg-secondary border border-border rounded-xl px-4 py-2.5 text-foreground hover:bg-secondary/80 transition-all">
+                      <Filter className="w-4 h-4 text-muted-foreground" />
                       <span className="text-sm">
                         ترتيب: {sortBy === "marketCap" ? "القيمة السوقية" : sortBy === "price" ? "السعر" : sortBy === "change" ? "التغير" : "الاسم"}
                       </span>
-                      <ChevronDown className="w-4 h-4 text-[#8b949e]" />
+                      <ChevronDown className="w-4 h-4 text-muted-foreground" />
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="bg-[#161b22] border-[#30363d]">
-                      <DropdownMenuItem onClick={() => setSortBy("marketCap")} className="text-white hover:bg-[#21262d]">
+                    <DropdownMenuContent className="bg-card border-border">
+                      <DropdownMenuItem onClick={() => setSortBy("marketCap")} className="hover:bg-secondary">
                         القيمة السوقية
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => setSortBy("price")} className="text-white hover:bg-[#21262d]">
+                      <DropdownMenuItem onClick={() => setSortBy("price")} className="hover:bg-secondary">
                         السعر
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => setSortBy("change")} className="text-white hover:bg-[#21262d]">
+                      <DropdownMenuItem onClick={() => setSortBy("change")} className="hover:bg-secondary">
                         التغير
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => setSortBy("name")} className="text-white hover:bg-[#21262d]">
+                      <DropdownMenuItem onClick={() => setSortBy("name")} className="hover:bg-secondary">
                         الاسم
                       </DropdownMenuItem>
                     </DropdownMenuContent>
@@ -327,7 +327,7 @@ const Sectors = () => {
                       >
                         <Link
                           to={`/stock/${stock.symbol}`}
-                          className="block bg-[#161b22] rounded-xl p-5 border border-[#30363d] hover:border-[#484f58] transition-all group"
+                          className="block bg-card rounded-xl p-5 border border-border hover:border-primary/50 transition-all group"
                         >
                           <div className="flex items-start gap-3 mb-4">
                             {logoUrl ? (
@@ -337,33 +337,33 @@ const Sectors = () => {
                                 className="w-12 h-12 rounded-xl bg-white p-1 object-contain"
                               />
                             ) : (
-                              <div className="w-12 h-12 rounded-xl bg-[#21262d] flex items-center justify-center text-white font-bold">
+                              <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center text-foreground font-bold">
                                 {stock.symbol.slice(0, 2)}
                               </div>
                             )}
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between">
-                                <h3 className="font-bold text-white">{stock.symbol}</h3>
-                                <ExternalLink className="w-4 h-4 text-[#8b949e] opacity-0 group-hover:opacity-100 transition-opacity" />
+                                <h3 className="font-bold text-foreground">{stock.symbol}</h3>
+                                <ExternalLink className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
                               </div>
-                              <p className="text-xs text-[#8b949e] truncate">{stock.nameEn}</p>
+                              <p className="text-xs text-muted-foreground truncate">{stock.nameEn}</p>
                             </div>
                           </div>
                           
                           <div className="flex items-end justify-between">
                             <div>
-                              <p className="text-xl font-bold text-white">{stock.price.toFixed(2)}</p>
-                              <p className="text-xs text-[#8b949e]">MAD</p>
+                              <p className="text-xl font-bold text-foreground">{stock.price.toFixed(2)}</p>
+                              <p className="text-xs text-muted-foreground">MAD</p>
                             </div>
-                            <div className={`flex items-center gap-1 text-sm font-semibold ${stock.change >= 0 ? 'text-[#3fb950]' : 'text-[#f85149]'}`}>
+                            <div className={`flex items-center gap-1 text-sm font-semibold ${stock.change >= 0 ? 'text-chart-positive' : 'text-chart-negative'}`}>
                               {stock.change >= 0 ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
                               {stock.change >= 0 ? '+' : ''}{stock.change.toFixed(2)}%
                             </div>
                           </div>
                           
-                          <div className="mt-4 pt-3 border-t border-[#30363d] flex items-center justify-between text-xs text-[#8b949e]">
+                          <div className="mt-4 pt-3 border-t border-border flex items-center justify-between text-xs text-muted-foreground">
                             <span>القيمة السوقية</span>
-                            <span className="text-white font-medium">
+                            <span className="text-foreground font-medium">
                               {stock.marketCap >= 1000 
                                 ? (stock.marketCap / 1000).toFixed(1) + 'B' 
                                 : stock.marketCap.toFixed(0) + 'M'} MAD

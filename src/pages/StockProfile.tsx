@@ -1,7 +1,7 @@
-import { useState, useEffect, Suspense, lazy } from "react";
+import { useState, Suspense, lazy } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { TrendingUp, TrendingDown, Star, Bell, Share2, FileText, RefreshCw } from "lucide-react";
+import { TrendingUp, TrendingDown, Star, Bell, FileText, RefreshCw } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/landing/Footer";
 import StockBanner from "@/components/stock/StockBanner";
@@ -12,6 +12,7 @@ import StockSocialShare from "@/components/stock/StockSocialShare";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useStockData } from "@/hooks/useStockData";
+import { useWatchlist } from "@/hooks/useWatchlist";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getStockLogoUrl } from "@/lib/stockLogos";
 import LazyChart from "@/components/ui/LazyChart";
@@ -23,6 +24,7 @@ const StockRiskIndicators = lazy(() => import("@/components/stock/StockRiskIndic
 const StockSectorComparison = lazy(() => import("@/components/stock/StockSectorComparison"));
 const StockTechnicalIndicators = lazy(() => import("@/components/stock/StockTechnicalIndicators"));
 const StockProjection = lazy(() => import("@/components/stock/StockProjection"));
+const StockInfoBase = lazy(() => import("@/components/stock/StockInfoBase"));
 
 // Extended stock data with additional metrics
 const stockDescriptions: Record<string, string> = {
@@ -171,7 +173,7 @@ const StockProfile = () => {
                 )}
                 <div>
                   <p className="text-3xl font-bold text-foreground">{stockWithMetrics.price.toFixed(2)} MAD</p>
-                  <div className={`flex items-center gap-2 ${stockWithMetrics.isPositive ? "text-[#089981]" : "text-[#f23645]"}`}>
+                  <div className={`flex items-center gap-2 ${stockWithMetrics.isPositive ? "text-chart-positive" : "text-chart-negative"}`}>
                     {stockWithMetrics.isPositive ? <TrendingUp className="w-5 h-5" /> : <TrendingDown className="w-5 h-5" />}
                     <span className="text-lg font-semibold">
                       {stockWithMetrics.isPositive ? "+" : ""}{stockWithMetrics.change.toFixed(2)}%
@@ -214,7 +216,7 @@ const StockProfile = () => {
                     </TooltipTrigger>
                     <TooltipContent>إنشاء تنبيه</TooltipContent>
                   </Tooltip>
-                  <Button variant="default" className="bg-[#2962ff] hover:bg-[#1e88e5]">
+                  <Button variant="default" className="bg-primary hover:bg-primary/90">
                     <FileText className="w-4 h-4" />
                     تحميل التقرير
                   </Button>
@@ -273,7 +275,7 @@ const StockProfile = () => {
                       onClick={() => setChartType("tradingview")}
                       className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                         chartType === "tradingview"
-                          ? "bg-[#2962ff] text-white shadow-sm"
+                          ? "bg-primary text-primary-foreground shadow-sm"
                           : "text-muted-foreground hover:text-foreground"
                       }`}
                     >

@@ -36,6 +36,8 @@ const Header = () => {
     { label: "القطاعات", href: "/sectors" },
     { label: t('common.screener'), href: "/screener" },
     { label: t('common.funds'), href: "/funds" },
+    { label: "المفضلة", href: "/watchlist" },
+    { label: "مقارنة", href: "/compare" },
   ];
 
   const isActive = (href: string) => {

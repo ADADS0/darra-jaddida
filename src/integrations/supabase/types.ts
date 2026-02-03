@@ -14,6 +14,77 @@ export type Database = {
   }
   public: {
     Tables: {
+      portfolio_holdings: {
+        Row: {
+          average_price: number
+          created_at: string
+          id: string
+          notes: string | null
+          portfolio_id: string
+          purchase_date: string | null
+          quantity: number
+          stock_symbol: string
+          updated_at: string
+        }
+        Insert: {
+          average_price?: number
+          created_at?: string
+          id?: string
+          notes?: string | null
+          portfolio_id: string
+          purchase_date?: string | null
+          quantity?: number
+          stock_symbol: string
+          updated_at?: string
+        }
+        Update: {
+          average_price?: number
+          created_at?: string
+          id?: string
+          notes?: string | null
+          portfolio_id?: string
+          purchase_date?: string | null
+          quantity?: number
+          stock_symbol?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "portfolio_holdings_portfolio_id_fkey"
+            columns: ["portfolio_id"]
+            isOneToOne: false
+            referencedRelation: "portfolios"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      portfolios: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -21,15 +92,19 @@ export type Database = {
           email: string | null
           full_name: string | null
           id: string
+          phone: string | null
           updated_at: string
+          user_id: string
         }
         Insert: {
           avatar_url?: string | null
           created_at?: string
           email?: string | null
           full_name?: string | null
-          id: string
+          id?: string
+          phone?: string | null
           updated_at?: string
+          user_id: string
         }
         Update: {
           avatar_url?: string | null
@@ -37,7 +112,54 @@ export type Database = {
           email?: string | null
           full_name?: string | null
           id?: string
+          phone?: string | null
           updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      stock_comparisons: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          symbols: string[]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          symbols: string[]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          symbols?: string[]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      watchlists: {
+        Row: {
+          created_at: string
+          id: string
+          stock_symbol: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          stock_symbol: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          stock_symbol?: string
+          user_id?: string
         }
         Relationships: []
       }
