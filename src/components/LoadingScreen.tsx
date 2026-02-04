@@ -39,7 +39,7 @@ const LoadingScreen = () => {
           <img
             src={casablueLogo}
             alt="Casablue"
-            className="relative w-24 h-24 rounded-2xl object-cover border-2 border-primary/50"
+            className="relative w-28 h-28 object-contain drop-shadow-2xl"
           />
         </div>
       </motion.div>
