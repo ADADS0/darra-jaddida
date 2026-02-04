@@ -21,7 +21,7 @@ import {
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useAuth } from "@/contexts/AuthContext";
-import casablueLogo from "@/assets/casablue-logo.jpeg";
+import casablueLogo from "@/assets/casablue-logo-new.png";
 
 const Header = () => {
   const { t, i18n } = useTranslation();
