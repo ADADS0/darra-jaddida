@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import casablueLogo from "@/assets/casablue-logo-new.png";
+import casablueLogo from "@/assets/casablue-logo-transparent.png";
 
 interface FooterLink {
   label: string;

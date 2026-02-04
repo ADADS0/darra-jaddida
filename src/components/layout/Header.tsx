@@ -21,7 +21,7 @@ import {
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import ThemeToggle from "@/components/ThemeToggle";
 import { useAuth } from "@/contexts/AuthContext";
-import casablueLogo from "@/assets/casablue-logo-new.png";
+import casablueLogo from "@/assets/casablue-logo-transparent.png";
 
 const Header = () => {
   const { t, i18n } = useTranslation();
@@ -80,7 +80,7 @@ const Header = () => {
                 <img
                   src={casablueLogo}
                   alt="Casablue"
-                  className="relative w-10 h-10 object-contain drop-shadow-lg brightness-0 invert dark:brightness-100 dark:invert-0"
+                  className="relative w-10 h-10 object-contain drop-shadow-lg"
                 />
               </div>
               <div className="flex flex-col">
