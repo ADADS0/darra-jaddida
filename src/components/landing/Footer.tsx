@@ -1,5 +1,5 @@
-import { TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
+import casablueLogo from "@/assets/casablue-logo-new.png";
 
 interface FooterLink {
   label: string;
@@ -43,12 +43,14 @@ const Footer = () => {
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <Link to="/" className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
-                <TrendingUp className="w-5 h-5 text-primary-foreground" />
-              </div>
+              <img
+                src={casablueLogo}
+                alt="Casablue"
+                className="w-12 h-12 object-contain drop-shadow-lg"
+              />
               <div className="flex flex-col">
-                <span className="text-lg font-bold text-foreground">CasaBourse</span>
-                <span className="text-[10px] text-muted-foreground">Financial Intelligence</span>
+                <span className="text-lg font-bold text-foreground">Casablue</span>
+                <span className="text-[10px] text-muted-foreground">Bourse de Casablanca</span>
               </div>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed">

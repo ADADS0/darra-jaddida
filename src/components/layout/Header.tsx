@@ -76,11 +76,11 @@ const Header = () => {
           >
             <Link to="/" className="flex items-center gap-3 group">
               <div className="relative">
-                <div className="absolute inset-0 bg-primary/30 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 bg-primary/30 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
                 <img
                   src={casablueLogo}
                   alt="Casablue"
-                  className="relative w-10 h-10 rounded-xl object-cover border border-border"
+                  className="relative w-10 h-10 object-contain drop-shadow-lg"
                 />
               </div>
               <div className="flex flex-col">
