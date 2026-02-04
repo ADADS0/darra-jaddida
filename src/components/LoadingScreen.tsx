@@ -40,6 +40,7 @@ const LoadingScreen = () => {
             src={casablueLogo}
             alt="Casablue"
             className="relative w-28 h-28 object-contain drop-shadow-2xl"
+            style={{ filter: 'drop-shadow(0 0 20px hsl(var(--primary) / 0.5))' }}
           />
         </div>
       </motion.div>
