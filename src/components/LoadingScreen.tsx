@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import casablueLogo from "@/assets/casablue-logo.jpeg";
+import casablueLogo from "@/assets/casablue-logo-new.png";
 
 const LoadingScreen = () => {
   return (
