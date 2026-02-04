@@ -80,7 +80,7 @@ const Header = () => {
                 <img
                   src={casablueLogo}
                   alt="Casablue"
-                  className="relative w-10 h-10 object-contain drop-shadow-lg"
+                  className="relative w-10 h-10 object-contain drop-shadow-lg brightness-0 invert dark:brightness-100 dark:invert-0"
                 />
               </div>
               <div className="flex flex-col">
