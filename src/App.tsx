@@ -24,6 +24,7 @@ import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Disclaimer from "./pages/Disclaimer";
 import Profile from "./pages/Profile";
+import StockFinancialsPage from "./pages/StockFinancials";
 
 const queryClient = new QueryClient();
 
@@ -53,6 +54,7 @@ const App = () => {
               <Route path="/" element={<Index />} />
               <Route path="/markets" element={<Markets />} />
               <Route path="/stock/:symbol" element={<StockProfile />} />
+              <Route path="/stock/:symbol/financials" element={<StockFinancialsPage />} />
               <Route path="/screener" element={<StockScreener />} />
               <Route path="/compare" element={<StockCompare />} />
               <Route path="/funds" element={<FundsList />} />

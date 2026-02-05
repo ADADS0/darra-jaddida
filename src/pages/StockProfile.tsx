@@ -16,6 +16,7 @@ import { useWatchlist } from "@/hooks/useWatchlist";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getStockLogoUrl } from "@/lib/stockLogos";
 import LazyChart from "@/components/ui/LazyChart";
+import { BarChart3 } from "lucide-react";
 
 // Lazy load heavy chart components
 const StockPriceChart = lazy(() => import("@/components/stock/StockPriceChart"));
@@ -220,6 +221,12 @@ const StockProfile = () => {
                     <FileText className="w-4 h-4" />
                     تحميل التقرير
                   </Button>
+                  <Link to={`/stock/${stockWithMetrics.symbol}/financials`}>
+                    <Button variant="outline" className="border-primary/50 text-primary hover:bg-primary/10">
+                      <BarChart3 className="w-4 h-4" />
+                      التحليل المالي
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
