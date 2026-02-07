@@ -8,7 +8,7 @@
    name: string;
    value: number;
    color: string;
-   subItems?: { name: string; value: number; color: string }[];
+   subItems?: { name: string; value: number; color?: string }[];
  }
  
  interface RevenueBreakdownChartProps {

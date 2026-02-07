@@ -1,153 +1,39 @@
- import { useState, Suspense, lazy } from "react";
- import { useParams, Link } from "react-router-dom";
- import { motion } from "framer-motion";
- import { ArrowLeft, Download, RefreshCw, ChevronDown } from "lucide-react";
- import Header from "@/components/layout/Header";
- import Footer from "@/components/landing/Footer";
- import { Button } from "@/components/ui/button";
- import { useStockData } from "@/hooks/useStockData";
- import { Skeleton } from "@/components/ui/skeleton";
- import { getStockLogoUrl } from "@/lib/stockLogos";
- import LazyChart from "@/components/ui/LazyChart";
- 
- // Import new financial components
- import FinancialGauge from "@/components/stock/financials/FinancialGauge";
- import RevenueBreakdownChart from "@/components/stock/financials/RevenueBreakdownChart";
- import MonthlyPerformanceChart from "@/components/stock/financials/MonthlyPerformanceChart";
- import CashFlowWaterfall from "@/components/stock/financials/CashFlowWaterfall";
- import MultiAxisChart from "@/components/stock/financials/MultiAxisChart";
- import BalanceSheetChart from "@/components/stock/financials/BalanceSheetChart";
- import HorizontalBarRanking from "@/components/stock/financials/HorizontalBarRanking";
- import ScatterQuadrantChart from "@/components/stock/financials/ScatterQuadrantChart";
- import FinancialDataTable from "@/components/stock/financials/FinancialDataTable";
- 
- // Lazy load the existing StockFinancials component
- const StockFinancials = lazy(() => import("@/components/stock/StockFinancials"));
- 
- // Generate mock financial data for Moroccan companies
- const generateCompanyFinancials = (symbol: string) => {
-   // Monthly performance data
-   const months = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"];
-   const monthlyData = months.map((month, i) => ({
-     month,
-     performance: Math.floor(Math.random() * 40) + 40,
-     target: 65,
-     change: Math.floor(Math.random() * 30) - 15,
-   }));
- 
-   // Multi-year financial data
-   const yearlyData = [
-     { year: "2020", revenue: 35.2, netIncome: 5.8, margin: 16.5, growth: 3.2 },
-     { year: "2021", revenue: 36.8, netIncome: 6.1, margin: 16.6, growth: 4.5 },
-     { year: "2022", revenue: 38.5, netIncome: 6.5, margin: 16.9, growth: 4.6 },
-     { year: "2023", revenue: 39.8, netIncome: 6.8, margin: 17.1, growth: 3.4 },
-     { year: "2024", revenue: 41.2, netIncome: 7.2, margin: 17.5, growth: 3.5 },
-   ];
- 
-   // Revenue breakdown by segment
-   const revenueBreakdown = [
-     { 
-       name: "الخدمات المتنقلة", 
-       value: 18500, 
-       color: "hsl(217 91% 60%)",
-       subItems: [
-         { name: "الاشتراكات", value: 12000, color: "hsl(217 91% 70%)" },
-         { name: "الدفع المسبق", value: 6500, color: "hsl(217 91% 80%)" },
-       ]
-     },
-     { 
-       name: "الإنترنت الثابت", 
-       value: 12800, 
-       color: "hsl(160 84% 39%)",
-       subItems: [
-         { name: "ADSL", value: 5800, color: "hsl(160 84% 50%)" },
-         { name: "الألياف البصرية", value: 7000, color: "hsl(160 84% 60%)" },
-       ]
-     },
-     { name: "خدمات المؤسسات", value: 6200, color: "hsl(38 92% 50%)" },
-     { name: "خدمات أخرى", value: 3700, color: "hsl(280 70% 50%)" },
-   ];
- 
-   // Cash flow waterfall
-   const cashFlowData = [
-     { label: "صافي الربح", value: 7200 },
-     { label: "الاستهلاك", value: 5500 },
-     { label: "تغير رأس المال العامل", value: -1200 },
-     { label: "التدفق التشغيلي", value: 11500, isTotal: true },
-     { label: "الاستثمارات", value: -4800 },
-     { label: "توزيعات الأرباح", value: -3200 },
-     { label: "التمويل", value: -1500 },
-     { label: "التدفق الحر", value: 2000, isTotal: true },
-   ];
- 
-   // Balance sheet data
-   const balanceSheetData = [
-     { year: "2020", assets: 125000, liabilities: 52000, equity: 73000, currentAssets: 28500, currentLiabilities: 18000, longTermDebt: 34000 },
-     { year: "2021", assets: 130000, liabilities: 54000, equity: 76000, currentAssets: 30000, currentLiabilities: 19000, longTermDebt: 35000 },
-     { year: "2022", assets: 135000, liabilities: 55000, equity: 80000, currentAssets: 31500, currentLiabilities: 19500, longTermDebt: 35500 },
-     { year: "2023", assets: 140000, liabilities: 56000, equity: 84000, currentAssets: 33000, currentLiabilities: 20000, longTermDebt: 36000 },
-     { year: "2024", assets: 145000, liabilities: 57000, equity: 88000, currentAssets: 35000, currentLiabilities: 20500, longTermDebt: 36500 },
-   ];
- 
-   // Top shareholders ranking
-   const shareholdersRanking = [
-     { rank: 1, label: "الدولة المغربية", value: 30, change: 0 },
-     { rank: 2, label: "Groupe CDG", value: 22, change: 1.5 },
-     { rank: 3, label: "صندوق التقاعد", value: 15, change: -0.5 },
-     { rank: 4, label: "مستثمرون مؤسسيون", value: 12, change: 2.1 },
-     { rank: 5, label: "أفراد", value: 8, change: -1.2 },
-     { rank: 6, label: "أجانب", value: 7, change: 0.8 },
-     { rank: 7, label: "Free Float", value: 6, change: -2.7 },
-   ];
- 
-   // Peer comparison scatter
-   const peerComparison = [
-     { name: symbol, x: 12, y: 18, size: 12 },
-     { name: "ATW", x: 8, y: 22, size: 10 },
-     { name: "BCP", x: 6, y: 15, size: 9 },
-     { name: "BOA", x: -2, y: 12, size: 8 },
-     { name: "CIH", x: 15, y: 8, size: 7 },
-     { name: "CDM", x: -5, y: -3, size: 6 },
-   ];
- 
-   // Income statement table data
-   const incomeStatementData = [
-     { label: "الإيرادات", values: [35200, 36800, 38500, 39800, 41200], isHighlighted: true },
-     { label: "تكلفة المبيعات", values: [-15800, -16200, -16800, -17200, -18300] },
-     { label: "الربح الإجمالي", values: [19400, 20600, 21700, 22600, 22900], isHighlighted: true },
-     { label: "المصاريف الإدارية", values: [-3200, -3400, -3500, -3600, -3800] },
-     { label: "مصاريف البيع والتسويق", values: [-2100, -2200, -2300, -2400, -2500] },
-     { label: "مصاريف البحث والتطوير", values: [-1800, -1900, -2000, -2100, -2100] },
-     { label: "EBITDA", values: [18500, 19200, 20100, 20800, 21500], isHighlighted: true, tooltip: "الأرباح قبل الفوائد والضرائب والاستهلاك والإطفاء" },
-     { label: "الاستهلاك والإطفاء", values: [-6200, -6400, -6600, -6800, -7000] },
-     { label: "الربح التشغيلي (EBIT)", values: [12300, 12800, 13500, 14000, 14500], isHighlighted: true },
-     { label: "المصاريف المالية", values: [-2100, -2000, -1900, -1850, -1800] },
-     { label: "الإيرادات المالية", values: [450, 480, 520, 550, 580] },
-     { label: "الربح قبل الضريبة", values: [10650, 11280, 12120, 12700, 13280] },
-     { label: "ضريبة الدخل", values: [-3200, -3380, -3640, -3810, -3980] },
-     { label: "صافي الربح", values: [5800, 6100, 6500, 6800, 7200], isHighlighted: true },
-   ];
- 
-   return {
-     monthlyData,
-     yearlyData,
-     revenueBreakdown,
-     cashFlowData,
-     balanceSheetData,
-     shareholdersRanking,
-     peerComparison,
-     incomeStatementData,
-   };
- };
- 
- const StockFinancialsPage = () => {
+import { useState, Suspense, lazy } from "react";
+import { useParams, Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { ArrowLeft, Download, RefreshCw, ChevronDown } from "lucide-react";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/landing/Footer";
+import { Button } from "@/components/ui/button";
+import { useStockData } from "@/hooks/useStockData";
+import { useStockFinancials } from "@/hooks/useStockFinancials";
+import { Skeleton } from "@/components/ui/skeleton";
+import { getStockLogoUrl } from "@/lib/stockLogos";
+import LazyChart from "@/components/ui/LazyChart";
+
+// Import new financial components
+import FinancialGauge from "@/components/stock/financials/FinancialGauge";
+import RevenueBreakdownChart from "@/components/stock/financials/RevenueBreakdownChart";
+import MonthlyPerformanceChart from "@/components/stock/financials/MonthlyPerformanceChart";
+import CashFlowWaterfall from "@/components/stock/financials/CashFlowWaterfall";
+import MultiAxisChart from "@/components/stock/financials/MultiAxisChart";
+import BalanceSheetChart from "@/components/stock/financials/BalanceSheetChart";
+import HorizontalBarRanking from "@/components/stock/financials/HorizontalBarRanking";
+import ScatterQuadrantChart from "@/components/stock/financials/ScatterQuadrantChart";
+import FinancialDataTable from "@/components/stock/financials/FinancialDataTable";
+
+// Lazy load the existing StockFinancials component
+const StockFinancials = lazy(() => import("@/components/stock/StockFinancials"));
+
+const StockFinancialsPage = () => {
    const { symbol } = useParams<{ symbol: string }>();
-   const { data, isLoading, error, refetch, isRefetching } = useStockData();
-   const [activeSection, setActiveSection] = useState<string>("overview");
- 
-   const stock = data?.stocks.find(s => s.symbol.toUpperCase() === symbol?.toUpperCase());
-   const logoUrl = getStockLogoUrl(symbol?.toUpperCase() || "");
-   const financials = generateCompanyFinancials(symbol || "IAM");
+  const { data, isLoading: stockLoading, error, refetch, isRefetching } = useStockData();
+  const { data: financials, isLoading: financialsLoading } = useStockFinancials(symbol || "");
+  const [activeSection, setActiveSection] = useState<string>("overview");
+
+  const isLoading = stockLoading || financialsLoading;
+  const stock = data?.stocks.find(s => s.symbol.toUpperCase() === symbol?.toUpperCase());
+  const logoUrl = getStockLogoUrl(symbol?.toUpperCase() || "");
  
    const sections = [
      { id: "overview", label: "نظرة عامة" },
@@ -285,29 +171,29 @@
                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                  <FinancialGauge
                    title="مؤشر الصحة المالية"
-                   value={72}
-                   maxValue={100}
-                   sections={[
-                     { label: "جيد", value: 40, color: "hsl(var(--chart-positive))" },
-                     { label: "متوسط", value: 30, color: "hsl(38 92% 50%)" },
-                     { label: "خطر", value: 30, color: "hsl(var(--chart-negative))" },
-                   ]}
-                   tooltip="مؤشر شامل يقيس الصحة المالية بناءً على السيولة والربحية والملاءة المالية"
-                 />
-                 <FinancialGauge
-                   title="مؤشر المخاطر"
-                   value={35}
-                   maxValue={100}
-                   sections={[
-                     { label: "منخفض", value: 33, color: "hsl(var(--chart-positive))" },
-                     { label: "متوسط", value: 34, color: "hsl(38 92% 50%)" },
-                     { label: "مرتفع", value: 33, color: "hsl(var(--chart-negative))" },
-                   ]}
-                   tooltip="مستوى المخاطر الاستثمارية بناءً على التقلبات والرافعة المالية"
-                 />
-                 <FinancialGauge
-                   title="مؤشر النمو"
-                   value={58}
+                    value={financials?.gauges?.health ?? 65}
+                    maxValue={100}
+                    sections={[
+                      { label: "جيد", value: 40, color: "hsl(var(--chart-positive))" },
+                      { label: "متوسط", value: 30, color: "hsl(38 92% 50%)" },
+                      { label: "خطر", value: 30, color: "hsl(var(--chart-negative))" },
+                    ]}
+                    tooltip="مؤشر شامل يقيس الصحة المالية بناءً على السيولة والربحية والملاءة المالية"
+                  />
+                  <FinancialGauge
+                    title="مؤشر المخاطر"
+                    value={financials?.gauges?.risk ?? 40}
+                    maxValue={100}
+                    sections={[
+                      { label: "منخفض", value: 33, color: "hsl(var(--chart-positive))" },
+                      { label: "متوسط", value: 34, color: "hsl(38 92% 50%)" },
+                      { label: "مرتفع", value: 33, color: "hsl(var(--chart-negative))" },
+                    ]}
+                    tooltip="مستوى المخاطر الاستثمارية بناءً على التقلبات والرافعة المالية"
+                  />
+                  <FinancialGauge
+                    title="مؤشر النمو"
+                    value={financials?.gauges?.growth ?? 55}
                    maxValue={100}
                    sections={[
                      { label: "ضعيف", value: 33, color: "hsl(var(--chart-negative))" },
@@ -352,7 +238,7 @@
                <FinancialDataTable
                  title="قائمة الدخل التفصيلية"
                  years={["2020", "2021", "2022", "2023", "2024"]}
-                 data={financials.incomeStatementData}
+                 data={financials.incomeStatement}
                  tooltip="البيانات المالية السنوية مع مقارنة التغير السنوي"
                />
              </div>
@@ -362,14 +248,14 @@
              <div className="space-y-6">
                <BalanceSheetChart
                  title="تطور الميزانية العمومية"
-                 data={financials.balanceSheetData}
+                 data={financials.balanceSheet}
                  tooltip="تطور الأصول والالتزامات وحقوق المساهمين عبر السنوات"
                />
  
                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                  <HorizontalBarRanking
                    title="توزيع المساهمين"
-                   data={financials.shareholdersRanking}
+                   data={financials.shareholders}
                    unit="%"
                    maxValue={35}
                    tooltip="أكبر المساهمين في رأس مال الشركة"
@@ -393,38 +279,38 @@
              <div className="space-y-6">
                <CashFlowWaterfall
                  title="تحليل التدفقات النقدية (Waterfall)"
-                 data={financials.cashFlowData}
+                 data={financials.cashFlow}
                  tooltip="تفصيل مصادر واستخدامات النقد من صافي الربح إلى التدفق الحر"
                />
  
                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                  <FinancialGauge
                    title="تغطية خدمة الدين"
-                   value={2.8}
-                   maxValue={5}
-                   unit="x"
-                   sections={[
-                     { label: "ضعيف", value: 1, color: "hsl(var(--chart-negative))" },
-                     { label: "مقبول", value: 1.5, color: "hsl(38 92% 50%)" },
-                     { label: "جيد", value: 2.5, color: "hsl(var(--chart-positive))" },
-                   ]}
-                   tooltip="قدرة الشركة على سداد التزامات الديون من التدفقات التشغيلية"
-                 />
-                 <FinancialGauge
-                   title="نسبة توزيع الأرباح"
-                   value={45}
-                   maxValue={100}
-                   unit="%"
-                   sections={[
-                     { label: "منخفض", value: 30, color: "hsl(var(--primary))" },
-                     { label: "معتدل", value: 40, color: "hsl(var(--chart-positive))" },
-                     { label: "مرتفع", value: 30, color: "hsl(38 92% 50%)" },
-                   ]}
-                   tooltip="نسبة الأرباح الموزعة على المساهمين من صافي الربح"
-                 />
-                 <FinancialGauge
-                   title="تحويل الربح لنقد"
-                   value={85}
+                    value={financials?.gauges?.debtCoverage ?? 2.2}
+                    maxValue={5}
+                    unit="x"
+                    sections={[
+                      { label: "ضعيف", value: 1, color: "hsl(var(--chart-negative))" },
+                      { label: "مقبول", value: 1.5, color: "hsl(38 92% 50%)" },
+                      { label: "جيد", value: 2.5, color: "hsl(var(--chart-positive))" },
+                    ]}
+                    tooltip="قدرة الشركة على سداد التزامات الديون من التدفقات التشغيلية"
+                  />
+                  <FinancialGauge
+                    title="نسبة توزيع الأرباح"
+                    value={financials?.gauges?.dividendPayout ?? 38}
+                    maxValue={100}
+                    unit="%"
+                    sections={[
+                      { label: "منخفض", value: 30, color: "hsl(var(--primary))" },
+                      { label: "معتدل", value: 40, color: "hsl(var(--chart-positive))" },
+                      { label: "مرتفع", value: 30, color: "hsl(38 92% 50%)" },
+                    ]}
+                    tooltip="نسبة الأرباح الموزعة على المساهمين من صافي الربح"
+                  />
+                  <FinancialGauge
+                    title="تحويل الربح لنقد"
+                    value={financials?.gauges?.cashConversion ?? 75}
                    maxValue={100}
                    unit="%"
                    sections={[
