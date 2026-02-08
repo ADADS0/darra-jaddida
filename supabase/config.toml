@@ -1,1 +1,7 @@
 project_id = "bphdlzclnianapnknwji"
+
+[functions.moroccan-stocks]
+verify_jwt = false
+
+[functions.moroccan-funds]
+verify_jwt = false
